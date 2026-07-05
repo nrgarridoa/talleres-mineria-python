@@ -2,7 +2,7 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![Reproducible](https://img.shields.io/badge/Seed%20Fija-2026-0068FF?style=for-the-badge&logo=octopusdeploy&logoColor=white)
+![Talleres](https://img.shields.io/badge/Talleres-2-0068FF?style=for-the-badge&logo=googlecolab&logoColor=white)
 
 #### Si te resulta util este proyecto, apoyalo con un [![Star](https://img.shields.io/github/stars/nrgarridoa/talleres-mineria-python?style=social)](https://github.com/nrgarridoa/talleres-mineria-python/stargazers) en el repositorio.
 
@@ -10,77 +10,96 @@
 
 # Talleres · Python aplicado a Minería
 
-> **La ley de corte y la vibración de una voladura son decisiones de todos los dias en operacion. No hace falta una caja negra para sostenerlas con evidencia: un modelo simple, bien validado y reproducible, alcanza.**
+> **Cada taller resuelve un problema real de operación minera con datos y código reproducible — no un ejercicio de juguete. Notebook, dataset y modelo validado de principio a fin.**
 
-Aqui subo los notebooks y datasets reproducibles que acompañan los articulos tecnicos de mi portafolio ([nrgarridoa.github.io](https://nrgarridoa.github.io)). Cada carpeta es un taller autocontenido — el notebook con el analisis paso a paso y el dataset para replicarlo. Todos fijan una semilla (`2026`) y corren de principio a fin sin intervencion manual.
+Este repositorio es el **hub de código** de mis artículos técnicos en [nrgarridoa.github.io](https://nrgarridoa.github.io/articles/): crece con cada artículo nuevo que publico. Cada carpeta es un taller autocontenido — el notebook con el análisis paso a paso y el dataset para replicarlo. Todos fijan una semilla (`2026`) y corren de principio a fin sin intervención manual.
 
 [![Ver articulos en el portafolio](https://img.shields.io/badge/Ver%20articulos-nrgarridoa.github.io-0068FF?style=for-the-badge&logo=readdotcv&logoColor=white)](https://nrgarridoa.github.io/articles/)
 
 ---
 
-## Vista previa
-
-| Mineral / Estéril — Frontera de decisión | Mineral / Estéril — Curva ROC |
-|:---:|:---:|
-| ![Frontera de decisión](screenshots/mineral-esteril-frontera.png) | ![Curva ROC](screenshots/mineral-esteril-roc.png) |
-
-| Vibraciones — Ajuste USBM (log-log) | Vibraciones — Predicción por carga |
-|:---:|:---:|
-| ![Ajuste USBM](screenshots/vibraciones-ppv-ajuste.png) | ![Predicción por carga](screenshots/vibraciones-ppv-prediccion.png) |
-
----
-
 ## Talleres
 
-| Taller | Tema | Técnica | Artículo |
-|---|---|---|---|
-| [`mineral-esteril`](mineral-esteril/) | Clasificar mineral y estéril en un pórfido Cu-Mo a partir de ley de Cu y Mo | Regresión logística + validación cruzada | [Leer](https://nrgarridoa.github.io/articles/mineral-esteril/) |
-| [`vibraciones-ppv`](vibraciones-ppv/) | Predecir la vibración (PPV) de una voladura según distancia y carga | Modelo USBM (regresión log-log) | [Leer](https://nrgarridoa.github.io/articles/vibraciones/) |
+<table>
+<thead>
+<tr><th>Vista previa</th><th>Taller</th><th>Categoría</th><th>Técnica</th><th>Artículo</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="screenshots/mineral-esteril-frontera.png" width="220"></td>
+<td><a href="mineral-esteril/"><code>mineral-esteril</code></a><br>Clasificar mineral y estéril en un pórfido Cu-Mo</td>
+<td>Control de leyes</td>
+<td>Regresión logística + CV</td>
+<td><a href="https://nrgarridoa.github.io/articles/mineral-esteril/">Leer →</a></td>
+</tr>
+<tr>
+<td><img src="screenshots/vibraciones-ppv-ajuste.png" width="220"></td>
+<td><a href="vibraciones-ppv/"><code>vibraciones-ppv</code></a><br>Predecir la vibración (PPV) de una voladura</td>
+<td>Voladura / Geomecánica</td>
+<td>Modelo USBM (log-log)</td>
+<td><a href="https://nrgarridoa.github.io/articles/vibraciones/">Leer →</a></td>
+</tr>
+</tbody>
+</table>
 
 ---
 
-## Hallazgos clave
+<details>
+<summary><strong>Hallazgos clave por taller (clic para expandir)</strong></summary>
 
-**Mineral / Estéril**
+### `mineral-esteril` — Clasificar mineral y estéril
+
+<img src="screenshots/mineral-esteril-roc.png" width="360">
+
 - La regresión logística con dos variables geoquímicas (Cu, Mo) alcanza **AUC ≈ 0.93** y **~89 % de acierto**, validado con 5-fold CV (AUC 0.929 ± 0.043).
 - El modelo recupera la dirección del *ground truth*: el **Cu domina la decisión** (~3× el peso de Mo), consistente con la geoquímica de un pórfido Cu-Mo.
 - El umbral de decisión no queda fijo en 0.5: se ajusta minimizando el costo total según cuánto cuesta diluir (falso positivo) frente a perder mineral (falso negativo).
 
-**Vibraciones (PPV / USBM)**
+### `vibraciones-ppv` — Predicción de PPV con el modelo USBM
+
+<img src="screenshots/vibraciones-ppv-prediccion.png" width="360">
+
 - Modelo ajustado: **PPV = 1065 · SD⁻¹·⁶¹⁸⁵** (R² = 0.956 en espacio log-log), muy cerca del sitio simulado (K=1000, β=1.60).
 - Validación cruzada 5-fold estable: **R² = 0.952 ± 0.011**.
 - Residuos normales (Shapiro-Wilk, p = 0.128) → los **intervalos de predicción al 95 %** son válidos para diseño conservador.
 - Se traduce directo a reglas de campo: carga máxima por retardo y distancia mínima segura según el límite normativo (NTP, USBM).
 
+</details>
+
 ---
 
-## Estructura del repositorio
+## Cómo está organizado
+
+Todos los talleres siguen la misma convención, para que agregar uno nuevo sea copiar el patrón:
+
+```
+<taller>/
+├── notebooks/
+│   └── <taller>.ipynb     # análisis reproducible, de principio a fin
+└── data/raw/
+    └── <dataset>.csv      # se regenera al correr el notebook (semilla fija)
+```
 
 ```
 talleres-mineria-python/
-|
-|-- README.md
-|-- LICENSE
-|-- requirements.txt
-|
-|-- screenshots/
-|   |-- mineral-esteril-frontera.png
-|   |-- mineral-esteril-roc.png
-|   |-- vibraciones-ppv-ajuste.png
-|   |-- vibraciones-ppv-prediccion.png
-|
-|-- mineral-esteril/
-|   |-- notebooks/
-|   |   |-- mineral-esteril.ipynb
-|   |-- data/raw/
-|       |-- mineral_esteril.csv
-|
-|-- vibraciones-ppv/
-    |-- notebooks/
-    |   |-- vibraciones-ppv.ipynb
-    |-- data/raw/
-        |-- blasting_vibration_data.csv
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── screenshots/            # 1-2 gráficos por taller, usados en este README
+├── mineral-esteril/
+└── vibraciones-ppv/
 ```
+
+<details>
+<summary><strong>Checklist para agregar un taller nuevo</strong></summary>
+
+1. Crear `<taller>/notebooks/<taller>.ipynb` y `<taller>/data/raw/` (el notebook genera el CSV).
+2. Exportar 1-2 gráficos clave a `screenshots/<taller>-<nombre>.png`.
+3. Agregar una fila a la tabla de **Talleres** (arriba) y un bloque de **Hallazgos** en el `<details>`.
+4. Subir el badge `Talleres-N` en la cabecera.
+5. Publicar el artículo en el portafolio con sus links apuntando a este repo.
+
+</details>
 
 ---
 
