@@ -13,6 +13,7 @@ a fin.
 | Taller | Tema | Artículo |
 |---|---|---|
 | [`mineral-esteril`](mineral-esteril/) | Clasificar mineral y estéril con regresión logística (pórfido de Cu-Mo) | [Leer](https://nrgarridoa.github.io/articles/mineral-esteril/) |
+| [`vibraciones-ppv`](vibraciones-ppv/) | Predicción de vibraciones por voladura (PPV) con el modelo USBM | [Leer](https://nrgarridoa.github.io/articles/vibraciones/) |
 
 ## Estructura
 
