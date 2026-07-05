@@ -10,3 +10,9 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# Activos locales (NO se versionan): el repo solo lleva notebooks + datasets.
+# PDFs y copy de LinkedIn por taller, generadores + avatares, y previews.
+linkedin/
+_tools/
+preview*/
