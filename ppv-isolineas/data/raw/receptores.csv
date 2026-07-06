@@ -1,0 +1,5 @@
+receptor,x,y,limite_mm_s,tipo
+Poblado,720,610,12.5,Residencial
+Caseta de operaciones,60,120,50.8,Industrial
+Portal / bocamina,640,150,50.0,Estructura
+Cresta de talud,230,530,100.0,Geotecnico

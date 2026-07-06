@@ -2,7 +2,7 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![Talleres](https://img.shields.io/badge/Talleres-2-0068FF?style=for-the-badge&logo=googlecolab&logoColor=white)
+![Talleres](https://img.shields.io/badge/Talleres-3-0068FF?style=for-the-badge&logo=googlecolab&logoColor=white)
 
 #### Si te resulta util este proyecto, apoyalo con un [![Star](https://img.shields.io/github/stars/nrgarridoa/talleres-mineria-python?style=social)](https://github.com/nrgarridoa/talleres-mineria-python/stargazers) en el repositorio.
 
@@ -27,6 +27,7 @@ Este repositorio es el hub de código de mis artículos técnicos: crece con cad
 ### Voladura / Geomecánica
 
 - **[`vibraciones-ppv`](vibraciones-ppv/)** — Predecir la vibración (PPV) de una voladura según distancia y carga · *Modelo USBM (regresión log-log)* · [Leer artículo →](https://nrgarridoa.github.io/articles/vibraciones/)
+- **[`ppv-isolineas`](ppv-isolineas/)** — Mapear la PPV de un disparo sobre el plano de mina y su frontera de cumplimiento · *Campo espacial + isolíneas (Matplotlib / Plotly)* · [Leer artículo →](https://nrgarridoa.github.io/articles/ppv-isolineas/)
 
 ---
 
@@ -59,6 +60,22 @@ Este repositorio es el hub de código de mis artículos técnicos: crece con cad
 - Validación cruzada 5-fold estable: **R² = 0.952 ± 0.011**.
 - Residuos normales (Shapiro-Wilk, p = 0.128) → los **intervalos de predicción al 95 %** son válidos para diseño conservador.
 - Se traduce directo a reglas de campo: carga máxima por retardo y distancia mínima segura según el límite normativo (NTP, USBM).
+
+### `ppv-isolineas` — Mapa de isolíneas de PPV (Vibraciones · Parte 2)
+
+<table>
+<tr>
+<td><img src="screenshots/ppv-isolineas-mapa.png" width="380"></td>
+<td><img src="screenshots/ppv-isolineas-cumplimiento.png" width="380"></td>
+</tr>
+<tr>
+<td colspan="2" align="center"><img src="screenshots/ppv-isolineas-real.png" width="760"></td>
+</tr>
+</table>
+
+- La ley USBM de la Parte 1 se lleva al plano como un **campo de PPV** y se contornea en isolíneas; la **frontera de 12.5 mm/s** separa cumplimiento de excedencia. Distancia al **polígono del disparo**, no al centroide.
+- El **receptor vinculante** no es el más cercano ni el de mayor PPV: la cresta de talud recibe 64 mm/s y cumple, pero el poblado (10 mm/s, límite residencial 12.5) fija el diseño. El **mapa P95** (×1.52) lo hace exceder → bajar la carga de **500 a 393 kg/retardo**.
+- El **campo realista** (heterogeneidad geológica + direccionalidad de la cara libre + topografía) deforma las isolíneas: se **abultan hacia el poblado**, que pasa a exceder **ya en la media** (16.7 mm/s). El modelo homogéneo subestima el riesgo donde la geometría del disparo enfoca la energía.
 
 </details>
 
@@ -109,7 +126,8 @@ Cada taller es independiente — notebook, dataset y dependencias propias. No ne
 | **pandas / NumPy** | Manipulación y generación de datos sintéticos |
 | **scikit-learn** | Regresión logística, escalado, validación cruzada |
 | **SciPy** | Regresión log-log (USBM), test de Shapiro-Wilk |
-| **Matplotlib** | Visualización: EDA, fronteras, curvas de ajuste, residuos |
+| **Matplotlib** | Visualización: EDA, fronteras, curvas de ajuste, residuos, isolíneas |
+| **Plotly** | Mapa interactivo de isolíneas de PPV (contornos + receptores) |
 | **Jupyter Lab** | Entorno de ejecución de los notebooks |
 | **Git / GitHub** | Versionamiento y publicación |
 
