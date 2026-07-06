@@ -2,7 +2,7 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![Talleres](https://img.shields.io/badge/Talleres-3-0068FF?style=for-the-badge&logo=googlecolab&logoColor=white)
+![Talleres](https://img.shields.io/badge/Talleres-4-0068FF?style=for-the-badge&logo=googlecolab&logoColor=white)
 
 #### Si te resulta util este proyecto, apoyalo con un [![Star](https://img.shields.io/github/stars/nrgarridoa/talleres-mineria-python?style=social)](https://github.com/nrgarridoa/talleres-mineria-python/stargazers) en el repositorio.
 
@@ -28,6 +28,10 @@ Este repositorio es el hub de código de mis artículos técnicos: crece con cad
 
 - **[`vibraciones-ppv`](vibraciones-ppv/)** — Predecir la vibración (PPV) de una voladura según distancia y carga · *Modelo USBM (regresión log-log)* · [Leer artículo →](https://nrgarridoa.github.io/articles/vibraciones/)
 - **[`ppv-isolineas`](ppv-isolineas/)** — Mapear la PPV de un disparo sobre el plano de mina y su frontera de cumplimiento · *Campo espacial + isolíneas (Matplotlib / Plotly)* · [Leer artículo →](https://nrgarridoa.github.io/articles/ppv-isolineas/)
+
+### Planeamiento minero
+
+- **[`modelo-produccion`](modelo-produccion/)** — Modelo de producción Cu-Au (tonelaje, ley, recuperación), valor, ley de corte, sensibilidad e incertidumbre · *Contabilidad metalúrgica + Monte Carlo* · [Leer artículo →](https://nrgarridoa.github.io/articles/modelo-produccion/)
 
 ---
 
@@ -76,6 +80,19 @@ Este repositorio es el hub de código de mis artículos técnicos: crece con cad
 - La ley USBM de la Parte 1 se lleva al plano como un **campo de PPV** y se contornea en isolíneas; la **frontera de 12.5 mm/s** separa cumplimiento de excedencia. Distancia al **polígono del disparo**, no al centroide.
 - El **receptor vinculante** no es el más cercano ni el de mayor PPV: la cresta de talud recibe 64 mm/s y cumple, pero el poblado (10 mm/s, límite residencial 12.5) fija el diseño. El **mapa P95** (×1.52) lo hace exceder → bajar la carga de **500 a 393 kg/retardo**.
 - El **campo realista** (heterogeneidad geológica + direccionalidad de la cara libre + topografía) deforma las isolíneas: se **abultan hacia el poblado**, que pasa a exceder **ya en la media** (16.7 mm/s). El modelo homogéneo subestima el riesgo donde la geometría del disparo enfoca la energía.
+
+### `modelo-produccion` — Modelo de producción minera (Planeamiento)
+
+<table>
+<tr>
+<td><img src="screenshots/modelo-produccion-tornado.png" width="380"></td>
+<td><img src="screenshots/modelo-produccion-montecarlo.png" width="380"></td>
+</tr>
+</table>
+
+- La **contabilidad metalúrgica** (tonelaje × ley × recuperación, con unidades correctas) es un modelo de producción completo en ~20 líneas: **5,879 t Cu, 5,106 oz Au, US$ 61.4 M**. El **oro subproducto** baja la ley de corte del Cu de **0.246 % a 0.119 %**.
+- El **tornado de sensibilidad** ordena las palancas: **precio y ley de Cu dominan**, muy por encima del tonelaje. Donde más se gana es en la ley alimentada y la exposición al precio, no acelerando la pala.
+- El **Monte Carlo** es la lección central: el plan determinístico (5,879 t) tiene solo **50 % de probabilidad de cumplirse** (es el P50). Comprometer producción exige bajar al **P80 (5,400 t)**.
 
 </details>
 
